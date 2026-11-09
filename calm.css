@@ -1,0 +1,34 @@
+/* Calm pass: lighter rendering + less "AI" styling. Loaded last. */
+/* --- performance: no full-screen blend overlays, no live blurs --- */
+body:before,body:after{display:none!important}
+.mj-face:after,.mj-pg:after{mix-blend-mode:normal!important;opacity:1!important;background-image:url(/portfolio/paper.png)!important;background-size:192px 192px!important}
+.mz-feat-l:before,.mz-page:before{mix-blend-mode:normal!important;opacity:.7!important;background-image:url(/portfolio/paper.png)!important;background-size:192px 192px!important}
+.dk-noise,.dk-grain,.dk-tex,.art:after{display:none!important}
+.store.is-behind canvas{filter:none!important;opacity:.4}
+.nav,.mj-skip,.mj-nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.mj-skip,.mj-nav{background:#10141f!important}
+*{text-shadow:none!important}
+.mj-hint{box-shadow:0 6px 16px rgba(0,0,0,.3)!important}
+.mj-hint b,.mj-hint-dot,.mj-chips span,.mj-list-ill span{animation:none!important}
+.mj-leaf,.mj-face{box-shadow:none}
+/* --- fewer gimmicks --- */
+.mz-quiz,.mj-quiz{display:none!important}
+/* --- type: one serif, upright headline words, quieter labels --- */
+:root{--accent-serif:"Source Serif 4 Variable",Georgia,serif!important;--hand:"Source Serif 4 Variable",Georgia,serif}
+.mz-h em,.mz-sec-h em,.mz-ct em,.mt-big-q em,.mt-num em,.mc-head em,.balls-title em,.h2 em,.show-title em,.think-title em,.cs-h em,.cs-next-t em,.mz-keep-big em,.mz-quiz-q em{font-family:inherit!important;font-style:normal!important;font-weight:inherit!important;letter-spacing:inherit!important;color:inherit!important}
+.mj-title em,.mt-hook,.mt-small,.mt-cue,.mt-five i,.mt-steps i,.mt-tease,.mt-qa dd,.mt-grid i,.mj-back-k,.mj-tl i,.mj-photo-cap,.cs-deck,.cs-pull,.mz-pull,.pullband blockquote{font-style:normal!important}
+.mj-hint{letter-spacing:.06em!important;font-weight:700!important}
+/* section headings: no italic serif accent, no marker underline */
+.accent,.serif,.h2 em,.mk{font-style:normal!important;font-family:inherit!important;font-weight:inherit!important}
+.h2 .accent,.h2 .serif,.h2 em{color:var(--rose)!important}
+.h2 .accent:before,.h2 .serif:before,.mk:before,.accent:before,.serif:before{display:none!important}
+.balls-title{font:800 clamp(3rem,9vw,7rem)/.95 var(--display)!important;letter-spacing:-.04em!important;color:var(--ink)!important}
+.balls-hint{font:500 1rem var(--sans)!important;color:var(--muted)!important}
+/* toolkit: a plain grouped list instead of physics balls */
+.balls-box{height:auto!important;margin-top:2rem!important;cursor:auto!important}
+.balls-box:after,.balls-canvas,.balls-box canvas{display:none!important}
+.tk{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 32px;max-width:var(--max);margin:0 auto;padding:0 var(--gutter) clamp(3rem,7vw,5rem)}
+.tk h3{margin:0 0 12px;padding-bottom:8px;border-bottom:2px solid var(--ink);font:700 12px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--rose)}
+.tk ul{list-style:none;margin:0;padding:0}
+.tk li{padding:9px 0;border-bottom:1px solid var(--line);font:500 17px var(--serif);color:var(--ink)}
+@media (max-width:860px){.tk{grid-template-columns:repeat(2,1fr)}}

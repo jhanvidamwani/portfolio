@@ -88,15 +88,11 @@
     sec.id = 'skyline'; sec.className = 'sky'; sec.setAttribute('aria-label', 'Somewhere between an idea and some data');
     sec.innerHTML =
       '<div class="sky-stage">' +
-      '<canvas class="sky-doodle" aria-hidden="true"></canvas>' +
       '<div class="sky-copy">' +
       '<div class="sky-kick">Jhanvi · Issue 01<b>/</b>Before the features</div>' +
       '<h2 class="sky-h"><span class="w">Somewhere</span> <span class="w">between</span>' +
       '<em><span class="w">an idea</span> <span class="w">&amp; some</span> <span class="w d">data.</span></em></h2>' +
-      '<div class="sky-hint">every lit window is a data point. <span class="g">' + (matchMedia('(hover: none)').matches ? 'tap' : 'hover') + ' the gold ones</span>, or draw an idea on the sky ↗</div>' +
       '</div>' +
-      '<div class="sky-steps" aria-hidden="true"><span>01 Sketch</span><span>02 Build</span><span>03 Read</span></div>' +
-      '<div class="sky-made" aria-hidden="true"></div>' +
       '<div class="sky-tip" role="status"></div>' +
       '</div>';
     anchor.parentNode.insertBefore(sec, anchor);
@@ -106,15 +102,15 @@
     stage.insertBefore(svg, sec.querySelector('.sky-copy'));
     var defs = el('defs', {}, svg);
     defs.innerHTML =
-      '<linearGradient id="skyBar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a47d6"/><stop offset=".5" stop-color="#2c2580"/><stop offset="1" stop-color="#11122e"/></linearGradient>' +
-      '<linearGradient id="skyRefl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b45e0" stop-opacity=".25"/><stop offset="1" stop-color="#5b45e0" stop-opacity="0"/></linearGradient>' +
+      '<linearGradient id="skyBar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3a5e"/><stop offset=".5" stop-color="#1d2745"/><stop offset="1" stop-color="#0f1424"/></linearGradient>' +
+      '<linearGradient id="skyRefl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a23b2a" stop-opacity=".25"/><stop offset="1" stop-color="#a23b2a" stop-opacity="0"/></linearGradient>' +
       '<filter id="skyGlow" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>';
 
     var bs = buildCity();
 
     // stars/snow
     var gs = el('g', {}, svg);
-    for (var i = 0; i < 70; i++) el('circle', { cx: f1(r(0, W)), cy: f1(r(0, G - 40)), r: f1(r(.6, 1.6)), fill: '#f5f2ec', opacity: f1(r(.08, .3)) }, gs);
+    for (var i = 0; i < 30; i++) el('circle', { cx: f1(r(0, W)), cy: f1(r(0, G - 40)), r: f1(r(.6, 1.6)), fill: '#f5f2ec', opacity: f1(r(.08, .3)) }, gs);
 
     // sketched moon
     var sk = el('g', { 'class': 'sky-sk' }, svg);
@@ -134,7 +130,7 @@
       var d = '';
       for (var pp = 0; pp < 2; pp++) for (var k = 0; k < pts.length - 1; k++) d += pencil(pts[k], pts[k + 1], 1);
       if (sp) d += pencil([cx, top], [cx, top - sp], .5);
-      if (rnd() < 0.5) { var n = Math.floor(b.w / 7); for (var hh = 0; hh < n; hh++) { var hx = b.x + 4 + hh * 7, y0 = top + r(20, 60); d += pencil([hx, y0], [hx + 10, y0 + r(20, 60)], .4); } }
+      if (rnd() < 0.3) { var n = Math.floor(b.w / 10); for (var hh = 0; hh < n; hh++) { var hx = b.x + 4 + hh * 7, y0 = top + r(20, 60); d += pencil([hx, y0], [hx + 10, y0 + r(20, 60)], .4); } }
       var sp_el = el('path', { d: d, pathLength: 1, opacity: .72 }, sk);
       sketchPaths.push({ el: sp_el, x: xn });
 
@@ -146,12 +142,12 @@
       var lvl = 0.35 + 0.65 * cl((b.h - 60) / 270);
       var ptsS = pts.map(function (p) { return f1(p[0]) + ',' + f1(p[1]); }).join(' ');
       el('polygon', { points: ptsS, fill: 'url(#skyBar)', 'fill-opacity': f1(0.55 + 0.35 * lvl), 'class': 'sky-body' }, inner);
-      el('polygon', { points: ptsS, fill: 'none', stroke: '#b7a9ff', 'stroke-opacity': .5, 'stroke-width': .8 }, inner);
+      el('polygon', { points: ptsS, fill: 'none', stroke: '#e8c48d', 'stroke-opacity': .5, 'stroke-width': .8 }, inner);
       var ins = b.kind === 'empire' ? 12 : b.kind === 'chrysler' ? 9 : b.kind === 'wtc' ? 10 : 6;
       for (var wy = top + 34; wy < G - 8; wy += 11) for (var wx = b.x + ins; wx < b.x + b.w - ins - 3; wx += 8)
-        if (rnd() < 0.2) el('rect', { x: f1(wx), y: f1(wy), width: 3, height: 4, fill: rnd() < .7 ? '#ffd88a' : '#f5f2ec', opacity: f1(.5 + .45 * rnd()) }, inner);
+        if (rnd() < (innerWidth < 700 ? 0.1 : 0.16)) el('rect', { x: f1(wx), y: f1(wy), width: 3, height: 4, fill: rnd() < .7 ? '#ffd88a' : '#f5f2ec', opacity: f1(.5 + .45 * rnd()) }, inner);
       var spEl = null;
-      if (sp) { spEl = el('g', { opacity: 0 }, g); el('line', { x1: cx, y1: top, x2: cx, y2: f1(top - sp), stroke: '#cfc4ff', 'stroke-width': 1.6, 'stroke-linecap': 'round' }, spEl); el('line', { x1: cx - 5, y1: f1(top - sp), x2: cx + 5, y2: f1(top - sp), stroke: '#cfc4ff', 'stroke-width': 1.4 }, spEl); }
+      if (sp) { spEl = el('g', { opacity: 0 }, g); el('line', { x1: cx, y1: top, x2: cx, y2: f1(top - sp), stroke: '#ecd3a8', 'stroke-width': 1.6, 'stroke-linecap': 'round' }, spEl); el('line', { x1: cx - 5, y1: f1(top - sp), x2: cx + 5, y2: f1(top - sp), stroke: '#ecd3a8', 'stroke-width': 1.4 }, spEl); }
       var scan = el('line', { x1: b.x, x2: b.x + b.w, y1: G, y2: G, stroke: '#ffd88a', 'stroke-width': 1.6, opacity: 0 }, g);
       var pin = null;
       if (b.fact) {
@@ -178,8 +174,7 @@
     var ld = 'M' + f1(lp[0][0]) + ' ' + f1(lp[0][1]);
     for (var ci = 1; ci < lp.length; ci++) { var p0 = lp[Math.max(0, ci - 2)], p1 = lp[ci - 1], p2 = lp[ci], p3 = lp[Math.min(lp.length - 1, ci + 1)];
       ld += ' C' + f1(p1[0] + (p2[0] - p0[0]) / 6) + ' ' + f1(p1[1] + (p2[1] - p0[1]) / 6) + ' ' + f1(p2[0] - (p3[0] - p1[0]) / 6) + ' ' + f1(p2[1] - (p3[1] - p1[1]) / 6) + ' ' + f1(p2[0]) + ' ' + f1(p2[1]); }
-    var glow = el('path', { d: ld, fill: 'none', stroke: '#9a88ff', 'stroke-width': 7, opacity: .4, filter: 'url(#skyGlow)', pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': 1 }, svg);
-    var line = el('path', { d: ld, fill: 'none', stroke: '#b7a9ff', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': 1 }, svg);
+    var line = el('path', { d: ld, fill: 'none', stroke: '#e8c48d', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': 1 }, svg);
     var dots = peaks.map(function (it) { return { it: it, el: el('circle', { cx: f1(it.cx), cy: f1(it.top - 30), r: 3.2, fill: '#0d1018', stroke: '#f5f2ec', 'stroke-width': 1.4, opacity: 0 }, svg) }; });
 
     // handwritten notes
@@ -192,8 +187,8 @@
     // move pencil paths to dash mode
     sketchPaths.forEach(function (s) { s.el.setAttribute('stroke-dasharray', '1'); s.el.setAttribute('stroke-dashoffset', '1'); });
 
-    var words = sec.querySelectorAll('.sky-h .w'), hint = sec.querySelector('.sky-hint'), steps = sec.querySelectorAll('.sky-steps span');
-    var tip = sec.querySelector('.sky-tip'), made = sec.querySelector('.sky-made');
+    var words = sec.querySelectorAll('.sky-h .w');
+    var tip = sec.querySelector('.sky-tip');
 
     // ---------- scroll-driven render ----------
     var target = RM ? 1 : 0, cur = target, visible = false, raf = 0, last = 0, lastDrawn = -1;
@@ -222,14 +217,12 @@
         if (it.pin) it.pin.setAttribute('opacity', fp >= 0.999 ? read : 0);
       });
       var lp2 = sm(0.5, 0.86, p);
-      line.setAttribute('stroke-dashoffset', 1 - lp2); glow.setAttribute('stroke-dashoffset', 1 - lp2);
+      line.setAttribute('stroke-dashoffset', 1 - lp2);
       dots.forEach(function (d) { d.el.setAttribute('opacity', lp2 * (W) > d.it.cx - 10 ? 1 : 0); });
       noteData.setAttribute('opacity', sm(0.8, 0.9, p));
       // copy
       var thr = [0.0, 0.04, 0.2, 0.55, 0.68];
       for (var i = 0; i < words.length; i++) words[i].classList.toggle('on', p >= thr[i] || RM);
-      hint.classList.toggle('on', p > 0.88);
-      steps[0].classList.toggle('on', p < 0.36); steps[1].classList.toggle('on', p >= 0.36 && p < 0.78); steps[2].classList.toggle('on', p >= 0.78);
       sec.classList.toggle('sky-done', p > 0.85);
     }
     function tick(t) {
@@ -239,7 +232,7 @@
       cur += (target - cur) * (1 - Math.exp(-dt / 110));
       if (Math.abs(target - cur) < 0.0005) cur = target;
       if (Math.abs(cur - lastDrawn) > 0.0002) { render(cur); lastDrawn = cur; }
-      if (visible && (cur !== target || true)) raf = requestAnimationFrame(tick);
+      if (visible && cur !== target) raf = requestAnimationFrame(tick);
     }
     var io = new IntersectionObserver(function (es) {
       visible = es[0].isIntersecting;
@@ -247,6 +240,7 @@
       if (!visible && raf) { cancelAnimationFrame(raf); raf = 0; }
     });
     io.observe(sec);
+    addEventListener('scroll', function () { if (visible && !raf) { last = 0; raf = requestAnimationFrame(tick); } }, { passive: true });
     render(cur);
 
     // ---------- tooltips ----------
@@ -268,88 +262,21 @@
     svg.addEventListener('pointerout', function (e) { var g = e.target.closest && e.target.closest('.sky-b.has'); if (g && !g.contains(e.relatedTarget)) hideTip(); });
     svg.addEventListener('click', function (e) { var g = e.target.closest && e.target.closest('.sky-b.has'); if (g && cur > 0.8) { if (active === g) hideTip(); else showTip(g); } });
 
-    // ---------- doodle: draw an idea, watch it become data ----------
-    var cv = sec.querySelector('.sky-doodle'), ctx = cv.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1);
-    var strokes = [], drawing = null, dRaf = 0, count = 0;
-    function size() { var b = stage.getBoundingClientRect(); cv.width = b.width * dpr; cv.height = b.height * dpr; }
-    size(); addEventListener('resize', size);
-    // svg sits above the canvas but only covers the bottom; let the canvas get events in the sky
-    svg.style.pointerEvents = 'none';
-    gData.style.pointerEvents = 'auto';
-    function pos(e) { var b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
-    cv.addEventListener('pointerdown', function (e) {
-      if (e.pointerType === 'touch' && !e.isPrimary) return;
-      drawing = { pts: [pos(e)], born: 0, state: 'pencil' };
-      cv.setPointerCapture(e.pointerId); loop();
-    });
-    cv.addEventListener('pointermove', function (e) {
-      if (!drawing) return;
-      var p = pos(e), l = drawing.pts[drawing.pts.length - 1];
-      if (Math.hypot(p[0] - l[0], p[1] - l[1]) > 3) drawing.pts.push(p);
-      loop();
-    });
-    function end() {
-      if (!drawing) return;
-      if (drawing.pts.length > 4) {
-        var s = drawing; s.state = 'morph'; s.t0 = performance.now();
-        // resample to evenly spaced points, then quantise into a "chart"
-        var tot = 0, segs = [0];
-        for (var i = 1; i < s.pts.length; i++) { tot += Math.hypot(s.pts[i][0] - s.pts[i - 1][0], s.pts[i][1] - s.pts[i - 1][1]); segs.push(tot); }
-        var n = Math.max(5, Math.min(18, Math.round(tot / 34))), out = [], j = 0;
-        for (var k = 0; k <= n; k++) { var dd = tot * k / n; while (j < segs.length - 2 && segs[j + 1] < dd) j++; var t = (dd - segs[j]) / ((segs[j + 1] - segs[j]) || 1); out.push([s.pts[j][0] + (s.pts[j + 1] ? (s.pts[j + 1][0] - s.pts[j][0]) * t : 0), s.pts[j][1] + (s.pts[j + 1] ? (s.pts[j + 1][1] - s.pts[j][1]) * t : 0)]); }
-        s.data = out; strokes.push(s); count++;
-        made.textContent = count === 1 ? 'one idea, now data ✓' : count + ' ideas, now data ✓';
-        made.classList.add('on'); clearTimeout(made._t); made._t = setTimeout(function () { made.classList.remove('on'); }, 2600);
-      }
-      drawing = null; loop();
-    }
-    cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
-
-    function jitterLine(pts, amp, off) {
-      ctx.beginPath();
-      for (var i = 0; i < pts.length; i++) { var x = pts[i][0] + Math.sin(i * 1.7 + off) * amp, y = pts[i][1] + Math.cos(i * 2.3 + off) * amp; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }
-      ctx.stroke();
-    }
-    function loop() { if (!dRaf) dRaf = requestAnimationFrame(paint); }
-    function paint(now) {
-      dRaf = 0; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      var alive = false;
-      strokes = strokes.filter(function (s) { return now - s.t0 < 9000; });
-      strokes.forEach(function (s) {
-        var t = (now - s.t0) / 900, k = cl(t), fade = 1 - sm(6000, 9000, now - s.t0);
-        alive = true;
-        // pencil fading out
-        ctx.strokeStyle = 'rgba(245,242,236,' + (0.7 * (1 - k) * fade) + ')'; ctx.lineWidth = 1.3;
-        jitterLine(s.pts, 0.8, 1); jitterLine(s.pts, 0.8, 4);
-        // data line drawing in
-        var m = Math.max(1, Math.floor(k * (s.data.length - 1)) + 1), seg = s.data.slice(0, m + 1);
-        ctx.save(); ctx.shadowColor = 'rgba(154,136,255,.8)'; ctx.shadowBlur = 14;
-        ctx.strokeStyle = 'rgba(183,169,255,' + fade + ')'; ctx.lineWidth = 2; ctx.beginPath();
-        seg.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }); ctx.stroke(); ctx.restore();
-        seg.forEach(function (p, i) {
-          var pop = cl((k * (s.data.length - 1) - i) * 2);
-          ctx.beginPath(); ctx.arc(p[0], p[1], 3.4 * pop, 0, 6.3);
-          ctx.fillStyle = 'rgba(13,16,24,' + fade + ')'; ctx.fill();
-          ctx.strokeStyle = (i === seg.length - 1 && k >= 1 ? 'rgba(255,216,138,' : 'rgba(245,242,236,') + fade + ')'; ctx.lineWidth = 1.4; ctx.stroke();
-        });
-      });
-      if (drawing) {
-        ctx.strokeStyle = 'rgba(245,242,236,.75)'; ctx.lineWidth = 1.3;
-        jitterLine(drawing.pts, 0.8, 1); jitterLine(drawing.pts, 0.8, 4);
-      }
-      if (alive) loop();
-    }
   }
 
   function guard() {
     new MutationObserver(function () { if (!document.getElementById('skyline') && document.getElementById('work')) mount(); })
       .observe(document.body, { childList: true, subtree: true });
   }
-  function start() {
-    guard();
-    if (document.getElementById('work')) setTimeout(mount, 60);
-    else { var n = 0, iv = setInterval(function () { if (document.getElementById('work') || ++n > 100) { clearInterval(iv); mount(); } }, 100); }
+  function whenHydrated(cb) {
+    var n = 0;
+    (function check() {
+      var el = document.getElementById('contact');
+      var ok = el && Object.keys(el).some(function (k) { return k.indexOf('__reactFiber') === 0; });
+      if (ok || ++n > 150) { (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(cb, { timeout: 1500 }); }
+      else setTimeout(check, 100);
+    })();
   }
+  function start() { whenHydrated(function () { mount(); guard(); }); }
   if (document.readyState === 'complete') start(); else addEventListener('load', start);
 })();
