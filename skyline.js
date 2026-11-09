@@ -81,8 +81,8 @@
   function roofY(b) { return G - b.h - (b.kind === 'chrysler' ? 10 : 0); }
 
   function mount() {
-    var contact = document.getElementById('contact');
-    if (!contact || document.getElementById('skyline')) return;
+    var anchor = document.getElementById('work');
+    if (!anchor || document.getElementById('skyline')) return;
 
     var sec = document.createElement('section');
     sec.id = 'skyline'; sec.className = 'sky'; sec.setAttribute('aria-label', 'Somewhere between an idea and some data');
@@ -90,7 +90,7 @@
       '<div class="sky-stage">' +
       '<canvas class="sky-doodle" aria-hidden="true"></canvas>' +
       '<div class="sky-copy">' +
-      '<div class="sky-kick">Jhanvi · Issue 01<b>/</b>The last page</div>' +
+      '<div class="sky-kick">Jhanvi · Issue 01<b>/</b>Before the features</div>' +
       '<h2 class="sky-h"><span class="w">Somewhere</span> <span class="w">between</span>' +
       '<em><span class="w">an idea</span> <span class="w">&amp; some</span> <span class="w d">data.</span></em></h2>' +
       '<div class="sky-hint">every lit window is a data point. <span class="g">' + (matchMedia('(hover: none)').matches ? 'tap' : 'hover') + ' the gold ones</span>, or draw an idea on the sky ↗</div>' +
@@ -99,7 +99,7 @@
       '<div class="sky-made" aria-hidden="true"></div>' +
       '<div class="sky-tip" role="status"></div>' +
       '</div>';
-    contact.parentNode.insertBefore(sec, contact.nextSibling);
+    anchor.parentNode.insertBefore(sec, anchor);
 
     var stage = sec.querySelector('.sky-stage');
     var svg = el('svg', { 'class': 'sky-svg', viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'xMidYMax slice', 'aria-hidden': 'true' });
@@ -343,13 +343,13 @@
   }
 
   function guard() {
-    new MutationObserver(function () { if (!document.getElementById('skyline') && document.getElementById('contact')) mount(); })
+    new MutationObserver(function () { if (!document.getElementById('skyline') && document.getElementById('work')) mount(); })
       .observe(document.body, { childList: true, subtree: true });
   }
   function start() {
     guard();
-    if (document.getElementById('contact')) setTimeout(mount, 60);
-    else { var n = 0, iv = setInterval(function () { if (document.getElementById('contact') || ++n > 100) { clearInterval(iv); mount(); } }, 100); }
+    if (document.getElementById('work')) setTimeout(mount, 60);
+    else { var n = 0, iv = setInterval(function () { if (document.getElementById('work') || ++n > 100) { clearInterval(iv); mount(); } }, 100); }
   }
   if (document.readyState === 'complete') start(); else addEventListener('load', start);
 })();
