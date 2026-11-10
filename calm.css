@@ -24,11 +24,3 @@ body:before,body:after{display:none!important}
 .h2 .accent:before,.h2 .serif:before,.mk:before,.accent:before,.serif:before{display:none!important}
 .balls-title{font:800 clamp(3rem,9vw,7rem)/.95 var(--display)!important;letter-spacing:-.04em!important;color:var(--ink)!important}
 .balls-hint{font:500 1rem var(--sans)!important;color:var(--muted)!important}
-/* toolkit: a plain grouped list instead of physics balls */
-.balls-box:has(.tk){height:auto!important;margin-top:2rem!important;cursor:auto!important}
-.balls-box:has(.tk):after,.balls-box:has(.tk) .balls-canvas,.balls-box:has(.tk) canvas{display:none!important}
-.tk{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 32px;max-width:var(--max);margin:0 auto;padding:0 var(--gutter) clamp(3rem,7vw,5rem)}
-.tk h3{margin:0 0 12px;padding-bottom:8px;border-bottom:2px solid var(--ink);font:700 12px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--rose)}
-.tk ul{list-style:none;margin:0;padding:0}
-.tk li{padding:9px 0;border-bottom:1px solid var(--line);font:500 17px var(--serif);color:var(--ink)}
-@media (max-width:860px){.tk{grid-template-columns:repeat(2,1fr)}}
