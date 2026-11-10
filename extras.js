@@ -111,7 +111,7 @@
   function frame() { raf = 0; updateStrip(); }
   function kick() { if (!raf) raf = requestAnimationFrame(frame); }
   function start() {
-    toolkit();
+    toolkit(); setInterval(toolkit, 1000);
     buildStrip();
     addEventListener('scroll', kick, { passive: true });
     addEventListener('resize', function () { T = null; kick(); });
