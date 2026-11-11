@@ -9,7 +9,7 @@
   var FACTS = {
     wtc: { k: 'Education', n: '4.0 <i>GPA</i>', l: 'M.S. Financial Technology Analytics at Stevens, finishing May 2027.' },
     empire: { k: 'AlphaSense', n: '#1 <i>of 8</i>', l: 'Top analyst on my team. Accuracy from 80% to 92%+ across 3,000+ companies.' },
-    chrysler: { k: 'Research', n: '10 → 20 <i>assets</i>', l: 'Research Assistant in Statistics at Stevens, extending a crypto Value-at-Risk study.' },
+    chrysler: { k: 'Research', n: '3 <i>asset classes</i>', l: 'Research Assistant in Statistics at Stevens, testing Value-at-Risk theory on crypto, tech and energy stocks.' },
     f1: { k: 'Grace Hopper 2026', n: '1 <i>of 10</i>', l: 'Stevens women selected, the only fintech student in a computer science pool.' },
     f2: { k: 'Media Club', n: '50 <i>people</i>', l: 'Creative Head at H.R. College, Mumbai.' },
     f3: { k: 'G20 panel', n: '300+', l: 'Attendees at an RBI-participated panel I ran as committee president.' },
